@@ -1,24 +1,45 @@
 import { useFormik } from 'formik'
 import "./signupForm.css"
 import { formSchema } from '../inputSchema/inputSchema';
+import 'react-toastify/dist/ReactToastify.css';
 
-const onSubmit = () => console.log("submitted");
 
 function SignupForm() {
+    const onSubmit = () => {
+        if (formik.values !== null) {
+            fetch("http://localhost:5000/userss", {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify(formik.values)
+
+            })
+            .then(response => console.log(response))
+            .then(json => console.log(json))
+            console.log("not null")
+        }
+    
+    }
+    
+
+
     const formik = useFormik({
         initialValues: {
-            firstName: "",
-            lastName: "",
+            fullName: "",
+            userName: "",
+            email: "",
             password: "",
             confirmPassword: "",
-            email: "",
-            tel:""
+            tel: "",
+            id:"",
         },
         validationSchema: formSchema,
-        onSubmit
+        onSubmit,
     });
+   
+    console.log(formik.values.id)
 
-    console.log(formik, formik.errors)
 
     return (
         <>
@@ -26,50 +47,52 @@ function SignupForm() {
                 <form className="login-sinup-card" onSubmit={formik.handleSubmit} autoComplete='off'>
                     <h2 className="heading">Create free account</h2>
                     <div className={"customInput"}>
-                        <label className="input-label">First Name</label> <br></br>
+                        <label className="input-label">Full Name</label> <br></br>
                         <input
-                            className={formik.errors.firstName ? "errorInputField" : "inputField"}
-                            id='firstName'
-                            type="text" value={formik.values.firstName}
-                            placeholder="Enter your First Name"
+                            className={formik.errors.fullName && formik.touched.fullName ? "errorInputField" : "inputField"}
+                            id='fullName'
+                            type="text" value={formik.values.fullName}
+                            placeholder="Enter your Full Name"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         >
                         </input>
-                        {formik.errors.firstName ? <label className='errorsField'>{formik.errors.firstName}</label> : ""}
+                        {formik.errors.fullName && formik.touched.fullName ? <label className='errorsField'>{formik.errors.fullName}</label> : ""}
 
                     </div>
+
                     <div className={"customInput"}>
-                        <label className="input-label">Last Name</label> <br></br>
+                        <label className="input-label">Username</label> <br></br>
                         <input
-                            className={formik.errors.lastName ? "errorInputField" : "inputField"}
-                            id='lastName'
-                            type="text" value={formik.values.lastName}
-                            placeholder="Enter your Last Name"
+                            className={formik.errors.userName && formik.touched.userName ? "errorInputField" : "inputField"}
+                            id='userName'
+                            type="text" value={formik.values.userName}
+                            placeholder="Enter your Userame"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         >
                         </input>
-                        {formik.errors.lastName ? <label className='errorsField'>{formik.errors.lastName}</label> : ""}
+                        {formik.errors.userName && formik.touched.userName ? <label className='errorsField'>{formik.errors.userName}</label> : ""}
                     </div>
+
                     <div className={"customInput"}>
                         <label className="input-label">Password</label> <br></br>
                         <input
-                            className={formik.errors.password ? "errorInputField" : "inputField"}
+                            className={formik.errors.password && formik.touched.password ? "errorInputField" : "inputField"}
                             id='password'
-                            type="password" 
+                            type="password"
                             value={formik.values.password}
                             placeholder="Enter Password"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         >
                         </input>
-                        {formik.errors.password ? <label className='errorsField'>{formik.errors.password}</label> : ""}
+                        {formik.errors.password && formik.touched.password ? <label className='errorsField'>{formik.errors.password}</label> : ""}
                     </div>
                     <div className={"customInput"}>
                         <label className="input-label">Confirm Password</label> <br></br>
                         <input
-                            className={formik.errors.confirmPassword ? "errorInputField" : "inputField"}
+                            className={formik.errors.confirmPassword && formik.touched.confirmPassword ? "errorInputField" : "inputField"}
                             id='confirmPassword'
                             type="password" value={formik.values.confirmPassword}
                             placeholder="Enter your password again"
@@ -77,12 +100,12 @@ function SignupForm() {
                             onBlur={formik.handleBlur}
                         >
                         </input>
-                        {formik.errors.confirmPassword? <label className='errorsField'>{formik.errors.confirmPassword}</label> : ""}
+                        {formik.errors.confirmPassword && formik.touched.confirmPassword ? <label className='errorsField'>{formik.errors.confirmPassword}</label> : ""}
                     </div>
                     <div className={"customInput"}>
                         <label className="input-label">Email</label> <br></br>
                         <input
-                            className={formik.errors.email ? "errorInputField" : "inputField"}
+                            className={formik.errors.email && formik.touched.email ? "errorInputField" : "inputField"}
                             id='email'
                             type="email" value={formik.values.email}
                             placeholder="Enter your email"
@@ -90,13 +113,13 @@ function SignupForm() {
                             onBlur={formik.handleBlur}
                         >
                         </input>
-                        {formik.errors.email?<label className='errorsField'>{formik.errors.email}</label> : ""}
+                        {formik.errors.email && formik.touched.email ? <label className='errorsField'>{formik.errors.email}</label> : ""}
 
                     </div>
                     <div className={"customInput"}>
                         <label className="input-label">Phone</label> <br></br>
                         <input
-                            className={formik.errors.tel ? "errorInputField" : "inputField"}
+                            className={formik.errors.tel && formik.touched.tel ? "errorInputField" : "inputField"}
                             id='tel'
                             type="tel" value={formik.values.tel}
                             placeholder="Enter your phone number"
@@ -104,11 +127,11 @@ function SignupForm() {
                             onBlur={formik.handleBlur}
                         >
                         </input>
-                        {formik.errors.tel?<label className='errorsField'>{formik.errors.tel}</label> : ""}
+                        {formik.errors.tel && formik.touched.tel ? <label className='errorsField'>{formik.errors.tel}</label> : ""}
 
                     </div>
 
-                    <button type="button" style={{width:"90%"}} className="btn btn-primary">Sign Up</button>
+                    <button disabled={formik.isSubmitting} type="submit" style={{ width: "90%" }} className="btn btn-primary">Sign Up</button>
 
 
 

@@ -2,12 +2,32 @@
     display: flex;
     flex-direction: column;
     border: none;
-    width:30%;
+    width:85%;
     background-color: white;
     padding: 1rem;
     box-shadow: 0px 3px 10px 0.5px rgb(0 0 0 / 50%);
     border-radius: 3px;
     justify-content: flex-start;    
+    margin-left:14%;
+    margin-top: 2rem;
+}
+
+.customInputContainer{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.checkBoxContainer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 52px;
+}
+
+.customInput{
+    width: 40%;
 }
 
 input:focus
@@ -17,17 +37,48 @@ input:focus
 .inputField{
     width: 90%;
     padding:5px;
+    padding-left: 0px;
     border: none;
     background-color: none;
     border-bottom: 1px solid grey ;
     margin-bottom: 20px;
     color: black;
     outline: none;
-    
     }
+
+.inputFieldWorkingHours{
+
+    width: 41%;
+    padding:5px;
+    padding-left: 0px;
+    border: none;
+    background-color: none;
+    border-bottom: 1px solid grey ;
+    margin-bottom: 20px;
+    color: black;
+    outline: none;
+}
+.checkboxInputFeild{
+width: 10%;
+}
+.errorInputFieldWorkingHours{
+
+    width: 41%;
+    padding:5px;
+    padding-left: 0px;
+    border: none;
+    border-bottom: 1px solid rgb(160, 16, 16);
+    margin-bottom: 20px;
+    color: rgb(160, 16, 16);
+    outline: none;
+
+}
+
+
     .errorInputField{
         width: 90%;
         padding:5px;
+        padding-left: 0px;
         border: none;
         border-bottom: 1px solid rgb(160, 16, 16);
         margin-bottom: 20px;
@@ -40,12 +91,26 @@ input:focus
     font-weight: 400;
     margin-top: 0px;
     margin-bottom:10px;
+    margin-left: 4.55rem
+    
 }
 
 .input-label{
     font-size: 14px;
     color: rgb(151, 148, 148);
-    margin-left: 5px;
+    
+}
+
+.timeFeild{
+    
+    font-size: 14px;
+    border: none;
+    background-color: none;
+    border-bottom: 1px solid grey ;
+    padding:6px;
+    padding-left: 10px;
+    padding-right: 10px;
+
 }
 .dropButton{
     background-color: none !important;
@@ -67,3 +132,10 @@ button:disabled
 {
     opacity: 0.50
 }
+
+.bttn{
+width: 6rem;
+margin-left: 4.55rem
+
+}
+
